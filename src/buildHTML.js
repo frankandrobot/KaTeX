@@ -81,6 +81,8 @@ var getTypeOfGroup = function(group) {
         return getTypeOfGroup(group.value);
     } else if (group.type === "color") {
         return getTypeOfGroup(group.value.value);
+    } else if (group.type === "cssClass") {
+        return getTypeOfGroup(group.value.value);
     } else if (group.type === "sizing") {
         return getTypeOfGroup(group.value.value);
     } else if (group.type === "styling") {
@@ -241,12 +243,11 @@ var groupTypes = {
     },
 
     cssClass: function(group, options, prev) {
-        var elements = makeSpan(
+        //technically, we don't want this span to interfere with spacing
+        return makeSpan(
           [group.value.cssClass],
           buildExpression(group.value.value, options)
         );
-
-        return new buildCommon.makeFragment(elements);
     },
 
     color: function(group, options, prev) {
