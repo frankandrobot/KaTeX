@@ -240,6 +240,15 @@ var groupTypes = {
             buildExpression(group.value.body, options.reset()));
     },
 
+    cssClass: function(group, options, prev) {
+        var elements = makeSpan(
+          [group.value.cssClass],
+          buildExpression(group.value.value, options)
+        );
+
+        return new buildCommon.makeFragment(elements);
+    },
+
     color: function(group, options, prev) {
         var elements = buildExpression(
             group.value.value,

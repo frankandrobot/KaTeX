@@ -103,6 +103,31 @@ var functions = {
         }
     },
 
+    // A CSS class
+    "\\cssClass": {
+        numArgs: 2,
+        allowedInText: true,
+        greediness: 3,
+        argTypes: ["text", "original"],
+        handler: function(func, cssClass, body) {
+            // Normalize the different kinds of bodies (see \text above)
+            var inner;
+            if (body.type === "ordgroup") {
+                inner = body.value;
+            } else {
+                inner = [body];
+            }
+
+            return {
+                type: "cssClass",
+                cssClass: cssClass.value.map(function(val) {
+                    return val.value;
+                }).join(""),
+                value: inner
+            };
+        }
+    },
+
     // A two-argument custom color
     "\\color": {
         numArgs: 2,

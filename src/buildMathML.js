@@ -110,6 +110,16 @@ var groupTypes = {
         return node;
     },
 
+    cssClass: function(group) {
+        var inner = buildExpression(group.value.value);
+
+        var node = new mathMLTree.MathNode("mstyle", inner);
+
+        node.setAttribute("class", group.value.cssClass);
+
+        return node;
+    },
+
     color: function(group) {
         var inner = buildExpression(group.value.value);
 
